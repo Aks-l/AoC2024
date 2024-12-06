@@ -1,11 +1,10 @@
 import numpy as np
-from copy import deepcopy
 
 directions = [(-1, 0),(0, 1),(1, 0),(0, -1)]
 
 def checkForLoop(gr):
-    x, y = int(np.where(gr == "^")[0]), int(np.where(gr == "^")[1])
-    trailGrid = np.zeros((MAXX, MAXY, 4))
+    x, y = startx, starty
+    trailGrid = np.zeros((MAXX, MAXY, len(directions)))
     direction = 0
     dx,dy = directions[direction]
     while 1:
@@ -24,14 +23,15 @@ def part2():
     validObstacles = 0
     for i in range(MAXX):
         for j in range(MAXY):
-            tempgrid = deepcopy(grid)
-            if tempgrid[i,j] == ".":
-                tempgrid[i,j] = "#"
-                validObstacles += checkForLoop(tempgrid)
+            if grid[i,j] == "X":
+                grid[i,j] = "#"
+                validObstacles += checkForLoop(grid)
+                grid[i,j] = "X"
+
     print(validObstacles)
 
 def part1():
-    x, y = int(np.where(grid == "^")[0]), int(np.where(grid == "^")[1])
+    x, y = startx, starty
     direction = 0
     while 0 <= x <= MAXX and 0 <= y <= MAXY:
         dx,dy = directions[direction]
@@ -51,7 +51,8 @@ if __name__ == "__main__":
         lines = file.readlines()
         grid = np.array([list(line.strip()) for line in lines])
         MAXX, MAXY = grid.shape
+        startx, starty = int(np.where(grid == "^")[0]), int(np.where(grid == "^")[1])
 
-    #part1 changes the grid, part2 creates copies so it runs first
-    part2()
     part1()
+    part2()
+    
