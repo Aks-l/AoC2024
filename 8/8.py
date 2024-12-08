@@ -18,7 +18,5 @@ for char in charset:
             for i in range(maxX):
                 if 0 <= x-dx*i < maxX and 0 <= y-dy*i < maxY:
                     antiGrid[x-dx*i, y-dy*i] = 1
-                    #since it loops through the same pair in reverse later
-                    #we don't mark the mirror now
 
 print(np.count_nonzero(antiGrid))
