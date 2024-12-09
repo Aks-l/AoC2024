@@ -51,7 +51,7 @@ if __name__ == "__main__":
         lines = file.readlines()
         grid = np.array([list(line.strip()) for line in lines])
         MAXX, MAXY = grid.shape
-        startx, starty = int(np.where(grid == "^")[0]), int(np.where(grid == "^")[1])
+        startx, starty = np.argwhere(grid == "^")[0]
 
     part1()
     part2()
