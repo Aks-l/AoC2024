@@ -7,13 +7,9 @@ maxX, maxY = 101, 103
 pattern = r"-?\d+"
 
 with open('14/input14.txt') as file:
-    while True:
-        try:
-            line = file.readline().strip()
-            x, y, vx, vy = map(int, re.findall(pattern, line))
-            data.append((x, y, vx, vy))
-        except:
-            break
+    for line in file:
+        x, y, vx, vy = map(int, re.findall(pattern, line))
+        data.append((x, y, vx, vy))
 
 def findend(x, y, vx, vy, seconds):
     # nympy array swaps (x,y) with (y,x) in visualization
@@ -28,8 +24,7 @@ for i in range(10000): #part 1 uses only i=100
         endpos.append(findend(data[j][0], data[j][1], data[j][2], data[j][3], i))
     for x,y in endpos:
         grid[x, y] += 1
-        
-    #cheese: assume the tree uses all robots, therefore none should overlap
+    #cheese: assume the tree uses all robots, therefore none should overlap (tunred out to be wrong, but works regardless)
     if not np.any((grid > 1)):
         print(i)
 
