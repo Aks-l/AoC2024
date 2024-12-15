@@ -68,7 +68,7 @@ def part2(x, y):
                             grid[x, y] = "."
                             break
                         if grid[nx, searcherY] == "[" or grid[nx, searcherY] == "]":
-                            marked.add(int(searcherY))
+                            marked.add(int(searcherY[0]))
                     for yVal in marked:
                         grid[x,yVal] = "[" if grid[x,yVal] == "]" else "]"
                 if i in "v^":
@@ -80,7 +80,7 @@ def part2(x, y):
                     if any(grid[a+dx, b] == "#" for a, b in connected):
                         continue
 
-                    connected = list(set((int(a), int(b)) for a, b in connected))
+                    connected = list(set((int(a[0]), int(b[0])) for a, b in connected))
                     if dx < 0:
                         connected.sort()
                     else:
