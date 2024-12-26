@@ -4,15 +4,13 @@ with open("19/input19.txt", "r") as file:
 parts = parts.split(", ")
 results = results.split("\n")
 
-parts.sort()
-out = 0
+part1 = 0
+part2 = 0
 
 memory = {}
-
 def possible(result):
     if result in memory:
         return memory[result]
-
     if len(result) == 0:
         return 1
 
@@ -25,7 +23,7 @@ def possible(result):
     return count
 
 for result in results:
-    print(result)
-    out += possible(result)
+    part1 += 1 if possible(result) else 0
+    part2 += possible(result)
 
-print(out)
+print(part1, part2)
